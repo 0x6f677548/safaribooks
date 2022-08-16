@@ -730,52 +730,51 @@ class SafariBooks:
             os.mkdir(books_dir)
 
         self.BOOK_PATH = os.path.join(books_dir, self.clean_book_title)
-        if not os.path.exists(self.BOOK_PATH):
-            self.display.set_output_dir(self.BOOK_PATH)
-            self.css_path = ""
-            self.images_path = ""
-            self.create_dirs()
+        self.display.set_output_dir(self.BOOK_PATH)
+        self.css_path = ""
+        self.images_path = ""
+        self.create_dirs()
 
-            self.chapter_title = ""
-            self.filename = ""
-            self.chapter_stylesheets = []
-            self.css = []
-            self.images = []
+        self.chapter_title = ""
+        self.filename = ""
+        self.chapter_stylesheets = []
+        self.css = []
+        self.images = []
 
-            self.display.info("Downloading book contents... (%s chapters)" % len(self.book_chapters), state=True)
-            self.BASE_HTML = self.BASE_01_HTML + (self.KINDLE_HTML if not args.kindle else "") + self.BASE_02_HTML
+        self.display.info("Downloading book contents... (%s chapters)" % len(self.book_chapters), state=True)
+        self.BASE_HTML = self.BASE_01_HTML + (self.KINDLE_HTML if not args.kindle else "") + self.BASE_02_HTML
 
-            self.cover = False
-            self.get()
-            if not self.cover:
-                self.cover = self.get_default_cover() if "cover" in self.book_info else False
-                cover_html = self.parse_html(
-                    html.fromstring("<div id=\"sbo-rt-content\"><img src=\"Images/{0}\"></div>".format(self.cover)), True
-                )
+        self.cover = False
+        self.get()
+        if not self.cover:
+            self.cover = self.get_default_cover() if "cover" in self.book_info else False
+            cover_html = self.parse_html(
+                html.fromstring("<div id=\"sbo-rt-content\"><img src=\"Images/{0}\"></div>".format(self.cover)), True
+            )
 
-                self.book_chapters = [{
-                    "filename": "default_cover.xhtml",
-                    "title": "Cover"
-                }] + self.book_chapters
+            self.book_chapters = [{
+                "filename": "default_cover.xhtml",
+                "title": "Cover"
+            }] + self.book_chapters
 
-                self.filename = self.book_chapters[0]["filename"]
-                self.save_page_html(cover_html)
+            self.filename = self.book_chapters[0]["filename"]
+            self.save_page_html(cover_html)
 
-            self.css_done_queue = Queue(0) if "win" not in sys.platform else WinQueue()
-            self.display.info("Downloading book CSSs... (%s files)" % len(self.css), state=True)
-            self.collect_css()
-            self.images_done_queue = Queue(0) if "win" not in sys.platform else WinQueue()
-            self.display.info("Downloading book images... (%s files)" % len(self.images), state=True)
-            self.collect_images()
+        self.css_done_queue = Queue(0) if "win" not in sys.platform else WinQueue()
+        self.display.info("Downloading book CSSs... (%s files)" % len(self.css), state=True)
+        self.collect_css()
+        self.images_done_queue = Queue(0) if "win" not in sys.platform else WinQueue()
+        self.display.info("Downloading book images... (%s files)" % len(self.images), state=True)
+        self.collect_images()
 
-            self.display.info("Creating EPUB file...", state=True)
-            self.create_epub()
+        self.display.info("Creating EPUB file...", state=True)
+        self.create_epub()
 
-            if not args.no_cookies:
-                json.dump(self.session.cookies.get_dict(), open(COOKIES_FILE, "w"))
+        if not args.no_cookies:
+            json.dump(self.session.cookies.get_dict(), open(COOKIES_FILE, "w"))
 
-            self.display.done(os.path.join(self.BOOK_PATH, self.book_id + ".epub"))
-            self.display.unregister()
+        self.display.done(os.path.join(self.BOOK_PATH, self.book_id + ".epub"))
+        self.display.unregister()
 
         if not self.display.in_error and not args.log:
             os.remove(self.display.log_file)
