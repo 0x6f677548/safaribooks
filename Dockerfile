@@ -2,6 +2,7 @@ FROM python:3.6
 
 ADD requirements.txt /safaribooks/requirements.txt
 ADD safaribooks.py /safaribooks/safaribooks.py
+ADD sso_cookies.py /safaribooks/sso_cookies.py
 
 WORKDIR /safaribooks
 RUN apt-get update
