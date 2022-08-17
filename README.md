@@ -1,12 +1,11 @@
 # SafariBooks
-Download and generate *EPUB* of your favorite books from [*Safari Books Online*](https://www.safaribooksonline.com) library.  
+Forked and based on https://github.com/lorenzodifuccia/safaribooks
+
+
+Download and generate *EPUB* of your favorite books from [*Safari Books Online*](https://www.safaribooksonline.com) library. This could be usefull if you have a subscription and want to read your ebooks on e-readers like kindle 
 I'm not responsible for the use of this program, this is only for *personal* and *educational* purpose.  
 Before any usage please read the *O'Reilly*'s [Terms of Service](https://learning.oreilly.com/terms/).  
 
-> ## ⚠ *Attention needed* ⚠ 
-> *If you are a developer and want to help this project, please take a look to the current [Milestone](https://github.com/lorenzodifuccia/safaribooks/milestone/1)*.  
-> *Checkout also the new APIv2 branch: [apiv2](https://github.com/lorenzodifuccia/safaribooks/tree/apiv2)*  
-> *The Community thanks 🙏🏻*
 
 ## Overview:
   * [Requirements & Setup](#requirements--setup)
@@ -42,7 +41,7 @@ It's really simple to use, just choose a book from the library and replace in th
   * `email:password` with your own. 
 
 ```shell
-$ python3 safaribooks.py --cred "account_mail@mail.com:password01" XXXXXXXXXXXXX
+$ python3 safaribooks.py --cred "account_mail@mail.com:password01" --bookid XXXXXXXXXXXXX
 ```
 
 The ID is the digits that you find in the URL of the book description page:  
@@ -53,8 +52,11 @@ Like: `https://www.safaribooksonline.com/library/view/test-driven-development-wi
 ```shell
 $ python3 safaribooks.py --help
 usage: safaribooks.py [--cred <EMAIL:PASS> | --login] [--no-cookies]
-                      [--kindle] [--preserve-log] [--help]
-                      <BOOK ID>
+                      [--kindle] [--preserve-log] [--help] [--title]
+                      [--bookid] <BOOK ID>
+                      [--topic] <TOPIC>
+                      [--collection] <COLLECTION ID>
+                      
 
 Download and generate an EPUB of your favorite books from Safari Books Online.
 
@@ -105,7 +107,7 @@ In this case, I suggest you to convert the `EPUB` to `AZW3` with Calibre or to `
 ## Examples:
   * ## Download [Test-Driven Development with Python, 2nd Edition](https://www.safaribooksonline.com/library/view/test-driven-development-with/9781491958698/):  
     ```shell
-    $ python3 safaribooks.py --cred "my_email@gmail.com:MyPassword1!" 9781491958698
+    $ python3 safaribooks.py --cred "my_email@gmail.com:MyPassword1!" --bookid 9781491958698
 
            ____     ___         _ 
           / __/__ _/ _/__ _____(_)
@@ -166,8 +168,3 @@ In this case, I suggest you to convert the `EPUB` to `AZW3` with Calibre or to `
     ![NoKindle Option](https://github.com/lorenzodifuccia/cloudflare/raw/master/Images/safaribooks/safaribooks_example02_NoKindle.png "Version compare")  
     
 ---  
-  
-## Thanks!!
-For any kind of problem, please don't hesitate to open an issue here on *GitHub*.  
-  
-*Lorenzo Di Fuccia*
