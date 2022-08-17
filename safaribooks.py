@@ -768,12 +768,14 @@ class SafariBooks:
         self.collect_images()
 
         self.display.info("Creating EPUB file...", state=True)
+        self.output_filename = self.book_title + " (" + self.book_id + ")" if self.args.title else self.book_id
+
         self.create_epub()
 
         if not args.no_cookies:
             json.dump(self.session.cookies.get_dict(), open(COOKIES_FILE, "w"))
 
-        self.display.done(os.path.join(self.BOOK_PATH, self.book_id + ".epub"))
+        self.display.done(os.path.join(self.BOOK_PATH, self.output_filename + ".epub"))
         self.display.unregister()
 
         if not self.display.in_error and not args.log:
@@ -1417,9 +1419,8 @@ class SafariBooks:
             os.remove(zip_file + ".zip")
 
         shutil.make_archive(zip_file, 'zip', self.BOOK_PATH)
-        output_filename = self.book_title + " (" + self.book_id + ")" if self.args.title else self.book_id
         os.rename(zip_file + ".zip", 
-            os.path.join(self.BOOK_PATH, output_filename) + ".epub")
+            os.path.join(self.BOOK_PATH, self.output_filename) + ".epub")
 
 
 # MAIN
