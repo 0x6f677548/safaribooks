@@ -1417,7 +1417,9 @@ class SafariBooks:
             os.remove(zip_file + ".zip")
 
         shutil.make_archive(zip_file, 'zip', self.BOOK_PATH)
-        os.rename(zip_file + ".zip", os.path.join(self.BOOK_PATH, self.book_id) + ".epub")
+        output_filename = self.book_title + " (" + self.book_id + ")" if self.args.title else self.book_id
+        os.rename(zip_file + ".zip", 
+            os.path.join(self.BOOK_PATH, output_filename) + ".epub")
 
 
 # MAIN
@@ -1448,6 +1450,13 @@ if __name__ == "__main__":
         help="Add some CSS rules that block overflow on `table` and `pre` elements."
              " Use this option if you're going to export the EPUB to E-Readers like Amazon Kindle."
     )
+
+    arguments.add_argument(
+        "--title", dest="title", action='store_true',
+        help="Output file will be based on title instead of ISBN."
+             " Use this option if you want output files with `Title (ISBN).epub`."
+    )
+
     arguments.add_argument(
         "--preserve-log", dest="log", action='store_true', help="Leave the `info_XXXXXXXXXXXXX.log`"
                                                                 " file even if there isn't any error."
