@@ -1,5 +1,5 @@
 # SafariBooks
-Forked and based on https://github.com/lorenzodifuccia/safaribooks
+Forked and based on https://github.com/lorenzodifuccia/safaribooks but with options to download a full topic or a playlist
 
 
 Download and generate *EPUB* of your favorite books from [*Safari Books Online*](https://www.safaribooksonline.com) library. This could be usefull if you have a subscription and want to read your ebooks on e-readers like kindle 
@@ -18,7 +18,7 @@ Before any usage please read the *O'Reilly*'s [Terms of Service](https://learnin
 ## Requirements & Setup:
 First of all, it requires `python3` and `pip3` or `pipenv` to be installed.  
 ```shell
-$ git clone https://github.com/lorenzodifuccia/safaribooks.git
+$ git clone https://github.com/0x6f677548/safaribooks.git
 Cloning into 'safaribooks'...
 
 $ cd safaribooks/
@@ -48,6 +48,21 @@ The ID is the digits that you find in the URL of the book description page:
 `https://www.safaribooksonline.com/library/view/book-name/XXXXXXXXXXXXX/`  
 Like: `https://www.safaribooksonline.com/library/view/test-driven-development-with/9781491958698/`  
   
+
+In the current fork, you can also download a topic:
+```shell
+$ python3 safaribooks.py --cred "account_mail@mail.com:password01" --topic linux
+```
+
+or eventually a playlist:
+```shell
+$ python3 safaribooks.py --cred "account_mail@mail.com:password01" --collection GUID
+```
+
+The collectionid is the digits that you find in the URL of the playlist description page:  
+`https://learning.oreilly.com/playlists/<GUID>/`  
+Like: `https://learning.oreilly.com/playlists/c1c43f61-9e45-4bd1-84d5-84799b1e6f44/`  
+
 #### Program options:
 ```shell
 $ python3 safaribooks.py --help
@@ -161,7 +176,7 @@ In this case, I suggest you to convert the `EPUB` to `AZW3` with Calibre or to `
  
   * ## Use or not the `--kindle` option:
     ```bash
-    $ python3 safaribooks.py --kindle 9781491958698
+    $ python3 safaribooks.py --kindle --bookid 9781491958698
     ```  
     On the right, the book created with `--kindle` option, on the left without (default):  
     
