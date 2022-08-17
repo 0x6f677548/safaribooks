@@ -1,7 +1,9 @@
-FROM python:3
-RUN apt-get update
-RUN apt-get install -y git
-RUN git clone https://github.com/0x6f677548/safaribooks.git
+FROM python:3.6
+
+ADD requirements.txt /safaribooks/requirements.txt
+ADD safaribooks.py /safaribooks/safaribooks.py
 
 WORKDIR /safaribooks
+RUN apt-get update
+RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
