@@ -1196,13 +1196,13 @@ if __name__ == "__main__":
 
     arguments.add_argument(
         "--topic", metavar='<TOPIC>',
-        help="Downloads all the books in a topic. You can find it in the URL (X-es):"
+        help="Downloads all the books in a topic. You can find it in the URL:"
              " `" + SAFARI_BASE_URL + "/library/topics/<topic>/`"
     )
 
     arguments.add_argument(
         "--collection", metavar='<COLLECTION>',
-        help="Downloads all the books in a collection. You can find it in the URL (X-es):"
+        help="Downloads all the books in a collection. You can find it in the URL:"
              " `" + SAFARI_BASE_URL + "/playlists/<collection>/`"
     )
 
