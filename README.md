@@ -75,26 +75,34 @@ usage: safaribooks.py [--cred <EMAIL:PASS> | --login] [--no-cookies]
 
 Download and generate an EPUB of your favorite books from Safari Books Online.
 
-positional arguments:
-  <BOOK ID>            Book digits ID that you want to download. You can find
-                       it in the URL (X-es):
-                       `https://learning.oreilly.com/library/view/book-
-                       name/XXXXXXXXXXXXX/`
-
 optional arguments:
-  --cred <EMAIL:PASS>  Credentials used to perform the auth login on Safari
-                       Books Online. Es. ` --cred
-                       "account_mail@mail.com:password01" `.
-  --login              Prompt for credentials used to perform the auth login
-                       on Safari Books Online.
-  --no-cookies         Prevent your session data to be saved into
-                       `cookies.json` file.
-  --kindle             Add some CSS rules that block overflow on `table` and
-                       `pre` elements. Use this option if you're going to
-                       export the EPUB to E-Readers like Amazon Kindle.
-  --preserve-log       Leave the `info_XXXXXXXXXXXXX.log` file even if there
-                       isn't any error.
-  --help               Show this help message.
+  --cred <EMAIL:PASS>          Credentials used to perform the auth login on Safari
+                               Books Online. Es. ` --cred
+                               "account_mail@mail.com:password01" `.
+  --login                      Prompt for credentials used to perform the auth login
+                               on Safari Books Online.
+  --no-cookies                 Prevent your session data to be saved into
+                               `cookies.json` file.
+  --bookid <BOOK ID>           Book digits ID that you want to download. You can find
+                               it in the URL (X-es):
+                               `https://learning.oreilly.com/library/view/book-
+                               name/XXXXXXXXXXXXX/`
+  --topic <TOPIC>              Downloads all the books in a topic. You can find 
+                               it in the URL:
+                               `https://learning.oreilly.com/library/topics/<topic>/`
+  --collection <COLLECTION ID> Downloads all the books in a collection. You can find 
+                               it in the URL:
+                               `https://learning.oreilly.com/playlists/<collection>/`
+
+  --kindle                     Add some CSS rules that block overflow on `table` and
+                               `pre` elements. Use this option if you are going to
+                               export the EPUB to E-Readers like Amazon Kindle.
+  --title                      Output file will be based on title instead of ISBN.
+                                Use this option if you want output files with `Title (ISBN).epub`.
+
+  --preserve-log               Leave the `info_XXXXXXXXXXXXX.log` file even if there
+                               isn't any error.
+  --help                       Show this help message.
 ```
   
 The first time you use the program, you'll have to specify your Safari Books Online account credentials (look [`here`](/../../issues/15) for special character).  
