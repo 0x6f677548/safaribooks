@@ -108,6 +108,14 @@ optional arguments:
 The first time you use the program, you'll have to specify your Safari Books Online account credentials (look [`here`](/../../issues/15) for special character).  
 The next times you'll download a book, before session expires, you can omit the credential, because the program save your session cookies in a file called `cookies.json`.  
 For **SSO**, please use the `sso_cookies.py` program in order to create the `cookies.json` file from the SSO cookies retrieved by your browser session (please follow [`these steps`](/../../issues/150#issuecomment-555423085)).  
+
+---
+(by 0x6f677548)
+When **SSO**, an alternative approach would be to use your browser to sign-in, go to developer tools>console and execute the following command:
+`console.log(JSON.stringify(document.cookie.split(';').map(c => c.split('=')).map(i => [i[0].trim(), i[1].trim()]).reduce((r, i) => {r[i[0]] = i[1]; return r;}, {})))`
+
+Get the result and paste it into cookies.json
+---
   
 Pay attention if you use a shared PC, because everyone that has access to your files can steal your session. 
 If you don't want to cache the cookies, just use the `--no-cookies` option and provide all time your credential through the `--cred` option or the more safe `--login` one: this will prompt you for credential during the script execution.
@@ -189,5 +197,8 @@ In this case, I suggest you to convert the `EPUB` to `AZW3` with Calibre or to `
     On the right, the book created with `--kindle` option, on the left without (default):  
     
     ![NoKindle Option](https://github.com/lorenzodifuccia/cloudflare/raw/master/Images/safaribooks/safaribooks_example02_NoKindle.png "Version compare")  
-    
+
+## running with docker
+build, run, bash and remove when exiting
+`docker build -t safaribooks . && docker run --name safaribooks --rm -it safaribooks bash`
 ---  
