@@ -49,11 +49,13 @@ The ID is the digits that you find in the URL of the book description page:
 Like: `https://www.safaribooksonline.com/library/view/test-driven-development-with/9781491958698/`  
   
 
+(by 0x6f677548)
 In the current fork, you can also download a topic:
 ```shell
 $ python3 safaribooks.py --cred "account_mail@mail.com:password01" --topic linux
 ```
 
+(by 0x6f677548)
 or eventually a playlist:
 ```shell
 $ python3 safaribooks.py --cred "account_mail@mail.com:password01" --collection GUID
