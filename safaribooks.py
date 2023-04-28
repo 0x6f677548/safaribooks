@@ -303,7 +303,21 @@ class SafariCollection:
 
         self.display.info(response['content'])
 
-        books.extend([book['ourn'].replace("urn:orm:book:", "") for book in response['content'] if 'ourn' in book])            
+        for book in response['content']:
+            if 'ourn' in book and book['ourn'] != None:
+                books.append(book['ourn'].replace("urn:orm:book:", ""))
+            else:
+                #get the book id from the url
+                #which is in the format /api/v1/book/9780137997299/
+                self.display.info(f"Coulnd't find ourn for {book['api_url']}. Falling back to id in url")
+                self.display.info(book)
+                if book['api_url'] == None or book['api_url'].split('/')[-2] == None:
+                    self.display.info(f"Couldn't find id for {book['api_url']}. Skipping")
+                    continue
+                id = book['api_url'].split('/')[-2]
+                self.display.info(f"Found id {id}")
+                books.append(id)
+
 
         self.display.info(books)
         return books
